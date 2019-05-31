@@ -1,0 +1,17 @@
+.player-list {
+  border: 1px solid #000;
+
+  .player-image-container {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background: #f1f1f1;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0px 1px 4px 0px #717171;
+
+    .player-avatar {
+      width: 100%;
+    }
+  }
+}

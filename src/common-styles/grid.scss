@@ -1,0 +1,23 @@
+$columns: 12;
+
+.container {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat($columns, 1fr);
+  margin: 0 auto;
+  width: 100%;
+}
+
+@for $i from 1 through $columns {
+  .col-#{$i} {
+    grid-column-end: span 12;
+  }
+}
+
+@media only screen and (min-width: 481px) {
+  @for $i from 1 to $columns {
+    .col-#{$i} {
+      grid-column-end: span $i;
+    }
+  }
+}

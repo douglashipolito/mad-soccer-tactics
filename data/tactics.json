@@ -1,0 +1,43 @@
+[
+  {
+    "id": "tactic1",
+    "positions": [
+      {
+        "id": "tactic1.1",
+        "index": 1,
+        "location": {
+          "top": "10%",
+          "left": "7%"
+        },
+        "playerId": null
+      },
+      {
+        "id": "tactic1.2",
+        "index": 2,
+        "location": {
+          "top": "10%",
+          "left": "70%"
+        },
+        "playerId": "t1.3"
+      },
+      {
+        "id": "tactic1.3",
+        "index": 3,
+        "location": {
+          "top": "44%",
+          "left": "18%"
+        },
+        "playerId": null
+      },
+      {
+        "id": "tactic1.4",
+        "index": 4,
+        "location": {
+          "top": "60%",
+          "left": "7%"
+        },
+        "playerId": "t1.2"
+      }
+    ]
+  }
+]
