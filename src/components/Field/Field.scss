@@ -8,8 +8,17 @@
     list-style: none;
     z-index: 5;
 
+    .dragabble-position {
+      position: absolute;
+      width: 7vw;
+      height: 7vw;
+      z-index: 10;
+    }
+
     .pos {
       position: absolute;
+      width: 7vw;
+      height: 7vw;
 
       &:before {
         content: "";

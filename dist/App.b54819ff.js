@@ -28832,9 +28832,46 @@ function (_React$Component) {
   _inherits(Field, _React$Component);
 
   function Field() {
+    var _getPrototypeOf2;
+
+    var _temp, _this;
+
     _classCallCheck(this, Field);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Field).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Field)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.handleMouseDown = function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      var target = event.target;
+      var xOffset = +(target.dataset.xOffset ? target.dataset.xOffset : 0);
+      var yOffset = +(target.dataset.yOffset ? target.dataset.yOffset : 0);
+      target.dataset.active = "false";
+      target.dataset.initialX = event.clientX - xOffset;
+      target.dataset.initialY = event.clientY - yOffset;
+
+      if (target.classList.contains("dragabble-position")) {
+        target.dataset.active = "true";
+      }
+    }, _this.handleMouseUp = function (event) {
+      var target = event.target;
+      target.dataset.initialX = 0;
+      target.dataset.initialY = 0;
+      target.dataset.active = "false";
+    }, _this.handleMouseMove = function (event) {
+      var target = event.target;
+
+      if (target.dataset.active === "true") {
+        event.preventDefault();
+        target.dataset.currentX = event.clientX - +target.dataset.initialX;
+        target.dataset.currentY = event.clientY - +target.dataset.initialY;
+        target.dataset.xOffset = target.dataset.currentX;
+        target.dataset.yOffset = target.dataset.currentY;
+        target.parentElement.style.transform = "translate3d(" + target.dataset.currentX + "px, " + target.dataset.currentY + "px, 0)";
+      }
+    }, _temp));
   }
 
   _createClass(Field, [{
@@ -28844,13 +28881,17 @@ function (_React$Component) {
       var teamId = team.id;
 
       if (!playerId) {
-        return null;
+        return _react.default.createElement("div", {
+          className: "dragabble-position"
+        });
       }
 
       var player = players.filter(function (player) {
         return player.id === playerId;
       })[0];
-      return _react.default.createElement("div", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
+        className: "dragabble-position"
+      }), _react.default.createElement("div", {
         className: "player",
         onDragStart: function onDragStart(event) {
           return context.handleDragStart(event, teamId, playerId);
@@ -28862,12 +28903,12 @@ function (_React$Component) {
           return context.handleDragEnd(event, team.id);
         },
         draggable: true
-      }, _react.default.createElement(_Player.default, player));
+      }, _react.default.createElement(_Player.default, player)));
     }
   }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
       return _react.default.createElement(_TacticsContext.Consumer, null, function (context) {
         return _react.default.createElement("div", {
@@ -28877,26 +28918,31 @@ function (_React$Component) {
             className: "positions team-".concat(index + 1),
             key: team.id
           }, team.tactic.positions.map(function (position) {
-            return _react.default.createElement("li", {
-              style: {
-                top: position.location.top,
-                left: position.location.left
-              },
-              key: position.id,
-              className: "pos".concat(position.index, " pos"),
-              onDragEnter: function onDragEnter(event) {
-                return context.handleDragEnter(event, team.id, position.playerId);
-              },
-              onDragLeave: function onDragLeave(event) {
-                return context.handleDragLeave(event, team.id, position.playerId);
-              },
-              onDragOver: function onDragOver(event) {
-                return context.handleDragOver(event, team.id, position.playerId);
-              },
-              onDrop: function onDrop(event) {
-                return context.handleDrop(event, team.id, position.id);
-              }
-            }, _this.renderPlayer(team, position.playerId, context));
+            return (// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+              _react.default.createElement("li", {
+                style: {
+                  top: position.location.top,
+                  left: position.location.left
+                },
+                key: position.id,
+                className: "pos".concat(position.index, " pos"),
+                onMouseDown: _this2.handleMouseDown,
+                onMouseUp: _this2.handleMouseUp,
+                onMouseMove: _this2.handleMouseMove,
+                onDragEnter: function onDragEnter(event) {
+                  return context.handleDragEnter(event, team.id, position.playerId);
+                },
+                onDragLeave: function onDragLeave(event) {
+                  return context.handleDragLeave(event, team.id, position.playerId);
+                },
+                onDragOver: function onDragOver(event) {
+                  return context.handleDragOver(event, team.id, position.playerId);
+                },
+                onDrop: function onDrop(event) {
+                  return context.handleDrop(event, team.id, position.id);
+                }
+              }, _this2.renderPlayer(team, position.playerId, context))
+            );
           }));
         })));
       });
@@ -29252,17 +29298,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function shuffle(a) {
-  for (var i = a.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var _ref = [a[j], a[i]];
-    a[i] = _ref[0];
-    a[j] = _ref[1];
-  }
-
-  return a;
-}
-
 var Tactics =
 /*#__PURE__*/
 function (_React$Component) {
@@ -29423,14 +29458,13 @@ function (_React$Component) {
       this.setTeamsTactics();
     }
   }, {
-    key: "setRandomPosition",
-    value: function setRandomPosition(team) {
+    key: "setTeamPosition",
+    value: function setTeamPosition(team) {
       var positions = [];
       var playersIds = team.players.map(function (player) {
         player.selected = true;
         return player.id;
       });
-      playersIds = shuffle(playersIds);
       team.tactic.positions.forEach(function (position) {
         var newPosition = Object.assign({}, position);
         newPosition.playerId = playersIds.pop();
@@ -29450,7 +29484,7 @@ function (_React$Component) {
         return team;
       });
 
-      this.setRandomPosition(teams[1]);
+      this.setTeamPosition(teams[1]);
       this.setState({
         teams: teams
       });
@@ -29586,7 +29620,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60535" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56123" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

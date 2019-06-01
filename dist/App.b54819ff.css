@@ -35,8 +35,16 @@
   list-style: none;
   z-index: 5;
 }
+.field-container .positions .dragabble-position {
+  position: absolute;
+  width: 7vw;
+  height: 7vw;
+  z-index: 10;
+}
 .field-container .positions .pos {
   position: absolute;
+  width: 7vw;
+  height: 7vw;
 }
 .field-container .positions .pos:before {
   content: "";
