@@ -1,0 +1,631 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tactics Renders 1`] = `
+<div
+  className="container tactics-component"
+>
+  <div
+    className="col-2 players-list-container team-1-list"
+  >
+    <div
+      className="tactice-selector-component"
+    >
+      <form>
+        <label
+          htmlFor="tactic-selector-t1"
+        >
+          <span>
+            Tactic
+          </span>
+          <select
+            onChange={[Function]}
+          >
+            <option
+              value="tactic1"
+            >
+              Tactic 1
+            </option>
+            <option
+              value="tactic2"
+            >
+              Tactic 2
+            </option>
+            <option
+              value="tactic3"
+            >
+              Tactic 3
+            </option>
+            <option
+              value="tactic4"
+            >
+              Tactic 4
+            </option>
+          </select>
+        </label>
+      </form>
+    </div>
+    <section
+      className="team-container player-list-container"
+    >
+      <h2
+        className="team-name"
+      >
+        Blue Team
+      </h2>
+      <div
+        className="player-list"
+      >
+        <ul
+          className="team-list"
+        >
+          <li
+            className="player"
+          >
+            <h3
+              className="player-name"
+            >
+              <span>
+                MarcusB
+                 - 
+                <small>
+                  Tank
+                </small>
+              </span>
+            </h3>
+            <figure
+              className="player-image-container"
+              draggable={true}
+              onDragEnd={[Function]}
+              onDragLeave={[Function]}
+              onDragStart={[Function]}
+            >
+              <img
+                alt="MarcusB"
+                className="player-avatar"
+                src="/images/chars/tank1.png"
+              />
+            </figure>
+          </li>
+          <li
+            className="player"
+          >
+            <h3
+              className="player-name"
+            >
+              <span>
+                RafaF
+                 - 
+                <small>
+                  Off-Tank
+                </small>
+              </span>
+            </h3>
+            <figure
+              className="player-image-container"
+              draggable={true}
+              onDragEnd={[Function]}
+              onDragLeave={[Function]}
+              onDragStart={[Function]}
+            >
+              <img
+                alt="RafaF"
+                className="player-avatar"
+                src="/images/chars/tank2.png"
+              />
+            </figure>
+          </li>
+          <li
+            className="player"
+          >
+            <h3
+              className="player-name"
+            >
+              <span>
+                EduM
+                 - 
+                <small>
+                  DPS
+                </small>
+              </span>
+            </h3>
+            <figure
+              className="player-image-container"
+              draggable={true}
+              onDragEnd={[Function]}
+              onDragLeave={[Function]}
+              onDragStart={[Function]}
+            >
+              <img
+                alt="EduM"
+                className="player-avatar"
+                src="/images/chars/dps1.png"
+              />
+            </figure>
+          </li>
+          <li
+            className="player"
+          >
+            <h3
+              className="player-name"
+            >
+              <span>
+                KedidJ
+                 - 
+                <small>
+                  Healer
+                </small>
+              </span>
+            </h3>
+            <figure
+              className="player-image-container"
+              draggable={true}
+              onDragEnd={[Function]}
+              onDragLeave={[Function]}
+              onDragStart={[Function]}
+            >
+              <img
+                alt="KedidJ"
+                className="player-avatar"
+                src="/images/chars/healer.png"
+              />
+            </figure>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
+  <div
+    className="col-8 field-container"
+  >
+    <div
+      className="field-area"
+    >
+      <div
+        className="football-pitch"
+      >
+        <ul
+          className="positions team-1"
+        >
+          <li
+            className="pos1 pos"
+            onDragEnter={[Function]}
+            onDragLeave={[Function]}
+            onDragOver={[Function]}
+            onDrop={[Function]}
+            style={
+              Object {
+                "left": "7%",
+                "top": "20%",
+              }
+            }
+          />
+          <li
+            className="pos2 pos"
+            onDragEnter={[Function]}
+            onDragLeave={[Function]}
+            onDragOver={[Function]}
+            onDrop={[Function]}
+            style={
+              Object {
+                "left": "75%",
+                "top": "20%",
+              }
+            }
+          />
+          <li
+            className="pos3 pos"
+            onDragEnter={[Function]}
+            onDragLeave={[Function]}
+            onDragOver={[Function]}
+            onDrop={[Function]}
+            style={
+              Object {
+                "left": "18%",
+                "top": "60%",
+              }
+            }
+          />
+          <li
+            className="pos4 pos"
+            onDragEnter={[Function]}
+            onDragLeave={[Function]}
+            onDragOver={[Function]}
+            onDrop={[Function]}
+            style={
+              Object {
+                "left": "68%",
+                "top": "60%",
+              }
+            }
+          />
+        </ul>
+        <ul
+          className="positions team-2"
+        >
+          <li
+            className="pos1 pos"
+            onDragEnter={[Function]}
+            onDragLeave={[Function]}
+            onDragOver={[Function]}
+            onDrop={[Function]}
+            style={
+              Object {
+                "left": "7%",
+                "top": "20%",
+              }
+            }
+          >
+            <div
+              className="player"
+              draggable={true}
+              onDragEnd={[Function]}
+              onDragLeave={[Function]}
+              onDragStart={[Function]}
+            >
+              <div
+                className="player-component"
+              >
+                <span
+                  className="player-name"
+                >
+                  SelvaGi
+                </span>
+                <figure
+                  className="player-image-container"
+                >
+                  <img
+                    alt="SelvaGi"
+                    className="img-responsive player-image"
+                    src="/images/chars/healer2.png"
+                  />
+                </figure>
+              </div>
+            </div>
+          </li>
+          <li
+            className="pos2 pos"
+            onDragEnter={[Function]}
+            onDragLeave={[Function]}
+            onDragOver={[Function]}
+            onDrop={[Function]}
+            style={
+              Object {
+                "left": "75%",
+                "top": "20%",
+              }
+            }
+          >
+            <div
+              className="player"
+              draggable={true}
+              onDragEnd={[Function]}
+              onDragLeave={[Function]}
+              onDragStart={[Function]}
+            >
+              <div
+                className="player-component"
+              >
+                <span
+                  className="player-name"
+                >
+                  MaxiM
+                </span>
+                <figure
+                  className="player-image-container"
+                >
+                  <img
+                    alt="MaxiM"
+                    className="img-responsive player-image"
+                    src="/images/chars/tank4.png"
+                  />
+                </figure>
+              </div>
+            </div>
+          </li>
+          <li
+            className="pos3 pos"
+            onDragEnter={[Function]}
+            onDragLeave={[Function]}
+            onDragOver={[Function]}
+            onDrop={[Function]}
+            style={
+              Object {
+                "left": "18%",
+                "top": "60%",
+              }
+            }
+          >
+            <div
+              className="player"
+              draggable={true}
+              onDragEnd={[Function]}
+              onDragLeave={[Function]}
+              onDragStart={[Function]}
+            >
+              <div
+                className="player-component"
+              >
+                <span
+                  className="player-name"
+                >
+                  FoaG
+                </span>
+                <figure
+                  className="player-image-container"
+                >
+                  <img
+                    alt="FoaG"
+                    className="img-responsive player-image"
+                    src="/images/chars/tank3.png"
+                  />
+                </figure>
+              </div>
+            </div>
+          </li>
+          <li
+            className="pos4 pos"
+            onDragEnter={[Function]}
+            onDragLeave={[Function]}
+            onDragOver={[Function]}
+            onDrop={[Function]}
+            style={
+              Object {
+                "left": "68%",
+                "top": "60%",
+              }
+            }
+          >
+            <div
+              className="player"
+              draggable={true}
+              onDragEnd={[Function]}
+              onDragLeave={[Function]}
+              onDragStart={[Function]}
+            >
+              <div
+                className="player-component"
+              >
+                <span
+                  className="player-name"
+                >
+                  Goriathu
+                </span>
+                <figure
+                  className="player-image-container"
+                >
+                  <img
+                    alt="Goriathu"
+                    className="img-responsive player-image"
+                    src="/images/chars/tank1.png"
+                  />
+                </figure>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div
+          className="outline marking"
+        />
+        <div
+          className="box left marking"
+        />
+        <div
+          className="box-d left marking"
+        />
+        <div
+          className="box left small marking"
+        />
+        <div
+          className="box right marking"
+        />
+        <div
+          className="box-d right marking"
+        />
+        <div
+          className="box right small marking"
+        />
+        <div
+          className="spot left marking"
+        />
+        <div
+          className="spot right marking"
+        />
+        <div
+          className="spot center marking"
+        />
+        <div
+          className="center-line marking"
+        />
+        <div
+          className="center-circle marking"
+        />
+        <div
+          className="corner top left marking"
+        />
+        <div
+          className="corner top right marking"
+        />
+        <div
+          className="corner bottom left marking"
+        />
+        <div
+          className="corner bottom right marking"
+        />
+        <div
+          className="grass"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="col-2 players-list-container team-2-list"
+  >
+    <div
+      className="tactice-selector-component"
+    >
+      <form>
+        <label
+          htmlFor="tactic-selector-t2"
+        >
+          <span>
+            Tactic
+          </span>
+          <select
+            onChange={[Function]}
+          >
+            <option
+              value="tactic1"
+            >
+              Tactic 1
+            </option>
+            <option
+              value="tactic2"
+            >
+              Tactic 2
+            </option>
+            <option
+              value="tactic3"
+            >
+              Tactic 3
+            </option>
+            <option
+              value="tactic4"
+            >
+              Tactic 4
+            </option>
+          </select>
+        </label>
+      </form>
+    </div>
+    <section
+      className="team-container player-list-container"
+    >
+      <h2
+        className="team-name"
+      >
+        Red Team
+      </h2>
+      <div
+        className="player-list"
+      >
+        <ul
+          className="team-list"
+        >
+          <li
+            className="player selected"
+          >
+            <h3
+              className="player-name"
+            >
+              <span>
+                Goriathu
+                 - 
+                <small>
+                  Tank
+                </small>
+              </span>
+            </h3>
+            <figure
+              className="player-image-container"
+              draggable={false}
+              onDragEnd={[Function]}
+              onDragLeave={[Function]}
+              onDragStart={[Function]}
+            >
+              <img
+                alt="Goriathu"
+                className="player-avatar"
+                src="/images/chars/tank1.png"
+              />
+            </figure>
+          </li>
+          <li
+            className="player selected"
+          >
+            <h3
+              className="player-name"
+            >
+              <span>
+                FoaG
+                 - 
+                <small>
+                  Off-Tank
+                </small>
+              </span>
+            </h3>
+            <figure
+              className="player-image-container"
+              draggable={false}
+              onDragEnd={[Function]}
+              onDragLeave={[Function]}
+              onDragStart={[Function]}
+            >
+              <img
+                alt="FoaG"
+                className="player-avatar"
+                src="/images/chars/tank3.png"
+              />
+            </figure>
+          </li>
+          <li
+            className="player selected"
+          >
+            <h3
+              className="player-name"
+            >
+              <span>
+                MaxiM
+                 - 
+                <small>
+                  DPS
+                </small>
+              </span>
+            </h3>
+            <figure
+              className="player-image-container"
+              draggable={false}
+              onDragEnd={[Function]}
+              onDragLeave={[Function]}
+              onDragStart={[Function]}
+            >
+              <img
+                alt="MaxiM"
+                className="player-avatar"
+                src="/images/chars/tank4.png"
+              />
+            </figure>
+          </li>
+          <li
+            className="player selected"
+          >
+            <h3
+              className="player-name"
+            >
+              <span>
+                SelvaGi
+                 - 
+                <small>
+                  Healer
+                </small>
+              </span>
+            </h3>
+            <figure
+              className="player-image-container"
+              draggable={false}
+              onDragEnd={[Function]}
+              onDragLeave={[Function]}
+              onDragStart={[Function]}
+            >
+              <img
+                alt="SelvaGi"
+                className="player-avatar"
+                src="/images/chars/healer2.png"
+              />
+            </figure>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</div>
+`;

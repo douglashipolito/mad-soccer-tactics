@@ -4,38 +4,56 @@ import "./PlayersList.scss";
 
 class PlayersList extends React.Component {
   render() {
+    const team = this.props.team;
+    if (!team) {
+      return null;
+    }
+
     return (
       <Consumer>
-        {context =>
-          context.teams.map(team => (
-            <section className="team-container" key={team.id}>
-              <h2 className="team-name">{team.name}</h2>
-              <div className="player-list">
-                <ul className="team-list">
-                  {team.players.map(player => (
-                    <li
-                      className="player"
-                      key={player.id}
+        {context => (
+          <section
+            className="team-container player-list-container"
+            key={team.id}
+          >
+            <h2 className="team-name">{team.name}</h2>
+            <div className="player-list">
+              <ul className="team-list">
+                {team.players.map(player => (
+                  <li
+                    className={`player${player.selected ? " selected" : ""}`}
+                    key={player.id}
+                  >
+                    <h3 className="player-name">
+                      <span>
+                        {player.name} - <small>{player.role}</small>
+                      </span>
+                    </h3>
+                    <figure
+                      className="player-image-container"
                       onDragStart={event =>
-                        context.handleDragStart(event, player, team.id)
+                        !player.selected
+                          ? context.handleDragStart(event, team.id, player.id)
+                          : false
                       }
-                      draggable
+                      onDragLeave={event =>
+                        context.handleDragLeave(event, team.id)
+                      }
+                      onDragEnd={event => context.handleDragEnd(event, team.id)}
+                      draggable={team.configurable ? !player.selected : false}
                     >
-                      <h3 className="role">{player.role}</h3>
-                      <figure className="player-image-container">
-                        <img
-                          className="player-avatar"
-                          src={player.avatar}
-                          alt={player.name}
-                        />
-                      </figure>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </section>
-          ))
-        }
+                      <img
+                        className="player-avatar"
+                        src={player.avatar}
+                        alt={player.name}
+                      />
+                    </figure>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
       </Consumer>
     );
   }

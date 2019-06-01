@@ -2,13 +2,15 @@ import React from "react";
 
 const TacticsContext = React.createContext({
   teams: [],
-  positionedPlayers: [],
   changePlayerPosition() {},
   handleDragStart() {},
+  handleDragEnter() {},
+  handleDragLeave() {},
   handleDragOver() {},
+  handleDragEnd() {},
   handleDrop() {},
-  tactics: [],
-  selectedTactic: {}
+  handleTacticChange() {},
+  tactics: []
 });
 
 export const Provider = TacticsContext.Provider;

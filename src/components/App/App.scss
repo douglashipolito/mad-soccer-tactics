@@ -1,6 +1,17 @@
 @import "normalize.css";
+@import "../../common-styles/utils.scss";
 @import "../../common-styles/grid.scss";
 
 .app-container {
   margin: 10px;
+}
+
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
 }

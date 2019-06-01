@@ -1,42 +1,153 @@
 [
   {
     "id": "tactic1",
+    "name": "Tactic 1",
     "positions": [
       {
         "id": "tactic1.1",
         "index": 1,
         "location": {
-          "top": "10%",
+          "top": "20%",
           "left": "7%"
-        },
-        "playerId": null
+        }
       },
       {
         "id": "tactic1.2",
         "index": 2,
         "location": {
-          "top": "10%",
-          "left": "70%"
-        },
-        "playerId": "t1.3"
+          "top": "20%",
+          "left": "75%"
+        }
       },
       {
         "id": "tactic1.3",
         "index": 3,
         "location": {
-          "top": "44%",
+          "top": "60%",
           "left": "18%"
-        },
-        "playerId": null
+        }
       },
       {
         "id": "tactic1.4",
         "index": 4,
         "location": {
           "top": "60%",
-          "left": "7%"
-        },
-        "playerId": "t1.2"
+          "left": "68%"
+        }
+      }
+    ]
+  },
+  {
+    "id": "tactic2",
+    "name": "Tactic 2",
+    "positions": [
+      {
+        "id": "tactic2.1",
+        "index": 1,
+        "location": {
+          "top": "50%",
+          "left": "15%"
+        }
+      },
+      {
+        "id": "tactic2.2",
+        "index": 2,
+        "location": {
+          "top": "50%",
+          "left": "65%"
+        }
+      },
+      {
+        "id": "tactic2.3",
+        "index": 3,
+        "location": {
+          "top": "20%",
+          "left": "90%"
+        }
+      },
+      {
+        "id": "tactic2.4",
+        "index": 4,
+        "location": {
+          "top": "15%",
+          "left": "34%"
+        }
+      }
+    ]
+  },
+  {
+    "id": "tactic3",
+    "name": "Tactic 3",
+    "positions": [
+      {
+        "id": "tactic3.1",
+        "index": 1,
+        "location": {
+          "top": "90%",
+          "left": "3%"
+        }
+      },
+      {
+        "id": "tactic3.2",
+        "index": 2,
+        "location": {
+          "top": "80%",
+          "left": "97%"
+        }
+      },
+      {
+        "id": "tactic3.3",
+        "index": 3,
+        "location": {
+          "top": "23%",
+          "left": "23%"
+        }
+      },
+      {
+        "id": "tactic3.4",
+        "index": 4,
+        "location": {
+          "top": "12%",
+          "left": "68%"
+        }
+      }
+    ]
+  },
+  {
+    "id": "tactic4",
+    "name": "Tactic 4",
+    "positions": [
+      {
+        "id": "tactic4.1",
+        "index": 1,
+        "location": {
+          "top": "5%",
+          "left": "56%"
+        }
+      },
+      {
+        "id": "tactic4.2",
+        "index": 2,
+        "location": {
+          "top": "32%",
+          "left": "67%"
+        }
+      },
+      {
+        "id": "tactic4.3",
+        "index": 3,
+        "location": {
+          "top": "15%",
+          "left": "90%"
+        }
+      },
+      {
+        "id": "tactic4.4",
+        "index": 4,
+        "location": {
+          "top": "36%",
+          "left": "18%"
+        }
       }
     ]
   }

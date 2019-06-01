@@ -27,7 +27,9 @@
         "role": "Healer",
         "avatar": "/images/chars/healer.png"
       }
-    ]
+    ],
+    "tacticId": "tactic1",
+    "configurable": true
   },
   {
     "name": "Red Team",
@@ -57,6 +59,8 @@
         "role": "Healer",
         "avatar": "/images/chars/healer2.png"
       }
-    ]
+    ],
+    "tacticId": "tactic1",
+    "configurable": false
   }
 ]

@@ -1,17 +1,39 @@
-.player-list {
-  border: 1px solid #000;
+.player-list-container {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 
   .player-image-container {
     width: 100px;
     height: 100px;
-    margin: 10px;
+    margin: 0 auto;
     background: #f1f1f1;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0px 1px 4px 0px #717171;
+    border: 2px solid #717171;
 
     .player-avatar {
       width: 100%;
+    }
+
+    &:hover {
+      cursor: move;
+      box-shadow: 2px 4px 14px 4px #717171;
+    }
+  }
+
+  .player {
+    &.selected {
+      .player-image-container {
+        opacity: 0.5;
+
+        &:hover {
+          cursor: no-drop;
+        }
+      }
     }
   }
 }

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Player Renders 1`] = `
+<div
+  className="player-component"
+>
+  <span
+    className="player-name"
+  />
+  <figure
+    className="player-image-container"
+  >
+    <img
+      className="img-responsive player-image"
+    />
+  </figure>
+</div>
+`;

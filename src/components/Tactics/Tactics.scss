@@ -1,0 +1,25 @@
+.tactics-component {
+  .players-list-container {
+    color: #000;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
+  }
+
+  .team-1-list {
+    border: 3px double #0344af;
+    margin-right: -15px;
+    .team-name {
+      color: #0344af;
+    }
+  }
+
+  .team-2-list {
+    border: 3px double #d83c3c;
+    margin-left: -15px;
+
+    .team-name {
+      color: #d83c3c;
+    }
+  }
+}

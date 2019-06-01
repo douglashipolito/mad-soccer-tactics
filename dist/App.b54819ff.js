@@ -28391,13 +28391,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var TacticsContext = _react.default.createContext({
   teams: [],
-  positionedPlayers: [],
   changePlayerPosition: function changePlayerPosition() {},
   handleDragStart: function handleDragStart() {},
+  handleDragEnter: function handleDragEnter() {},
+  handleDragLeave: function handleDragLeave() {},
   handleDragOver: function handleDragOver() {},
+  handleDragEnd: function handleDragEnd() {},
   handleDrop: function handleDrop() {},
-  tactics: [],
-  selectedTactic: {}
+  handleTacticChange: function handleTacticChange() {},
+  tactics: []
 });
 
 var Provider = TacticsContext.Provider;
@@ -28524,36 +28526,46 @@ function (_React$Component) {
   _createClass(PlayersList, [{
     key: "render",
     value: function render() {
+      var team = this.props.team;
+
+      if (!team) {
+        return null;
+      }
+
       return _react.default.createElement(_TacticsContext.Consumer, null, function (context) {
-        return context.teams.map(function (team) {
-          return _react.default.createElement("section", {
-            className: "team-container",
-            key: team.id
-          }, _react.default.createElement("h2", {
-            className: "team-name"
-          }, team.name), _react.default.createElement("div", {
-            className: "player-list"
-          }, _react.default.createElement("ul", {
-            className: "team-list"
-          }, team.players.map(function (player) {
-            return _react.default.createElement("li", {
-              className: "player",
-              key: player.id,
-              onDragStart: function onDragStart(event) {
-                return context.handleDragStart(event, player, team.id);
-              },
-              draggable: true
-            }, _react.default.createElement("h3", {
-              className: "role"
-            }, player.role), _react.default.createElement("figure", {
-              className: "player-image-container"
-            }, _react.default.createElement("img", {
-              className: "player-avatar",
-              src: player.avatar,
-              alt: player.name
-            })));
-          }))));
-        });
+        return _react.default.createElement("section", {
+          className: "team-container player-list-container",
+          key: team.id
+        }, _react.default.createElement("h2", {
+          className: "team-name"
+        }, team.name), _react.default.createElement("div", {
+          className: "player-list"
+        }, _react.default.createElement("ul", {
+          className: "team-list"
+        }, team.players.map(function (player) {
+          return _react.default.createElement("li", {
+            className: "player".concat(player.selected ? " selected" : ""),
+            key: player.id
+          }, _react.default.createElement("h3", {
+            className: "player-name"
+          }, _react.default.createElement("span", null, player.name, " - ", _react.default.createElement("small", null, player.role))), _react.default.createElement("figure", {
+            className: "player-image-container",
+            onDragStart: function onDragStart(event) {
+              return !player.selected ? context.handleDragStart(event, team.id, player.id) : false;
+            },
+            onDragLeave: function onDragLeave(event) {
+              return context.handleDragLeave(event, team.id);
+            },
+            onDragEnd: function onDragEnd(event) {
+              return context.handleDragEnd(event, team.id);
+            },
+            draggable: team.configurable ? !player.selected : false
+          }, _react.default.createElement("img", {
+            className: "player-avatar",
+            src: player.avatar,
+            alt: player.name
+          })));
+        }))));
       });
     }
   }]);
@@ -28582,6 +28594,121 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/Pitch/Pitch.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/Pitch/Pitch.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+require("./Pitch.scss");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var Pitch =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Pitch, _React$Component);
+
+  function Pitch() {
+    _classCallCheck(this, Pitch);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Pitch).apply(this, arguments));
+  }
+
+  _createClass(Pitch, [{
+    key: "render",
+    value: function render() {
+      return _react.default.createElement("div", {
+        className: "football-pitch"
+      }, this.props.children, _react.default.createElement("div", {
+        className: "outline marking"
+      }), _react.default.createElement("div", {
+        className: "box left marking"
+      }), _react.default.createElement("div", {
+        className: "box-d left marking"
+      }), _react.default.createElement("div", {
+        className: "box left small marking"
+      }), _react.default.createElement("div", {
+        className: "box right marking"
+      }), _react.default.createElement("div", {
+        className: "box-d right marking"
+      }), _react.default.createElement("div", {
+        className: "box right small marking"
+      }), _react.default.createElement("div", {
+        className: "spot left marking"
+      }), _react.default.createElement("div", {
+        className: "spot right marking"
+      }), _react.default.createElement("div", {
+        className: "spot center marking"
+      }), _react.default.createElement("div", {
+        className: "center-line marking"
+      }), _react.default.createElement("div", {
+        className: "center-circle marking"
+      }), _react.default.createElement("div", {
+        className: "corner top left marking"
+      }), _react.default.createElement("div", {
+        className: "corner top right marking"
+      }), _react.default.createElement("div", {
+        className: "corner bottom left marking"
+      }), _react.default.createElement("div", {
+        className: "corner bottom right marking"
+      }), _react.default.createElement("div", {
+        className: "grass"
+      }));
+    }
+  }]);
+
+  return Pitch;
+}(_react.default.Component);
+
+var _default = Pitch;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","./Pitch.scss":"components/Pitch/Pitch.scss"}],"components/Pitch/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _Pitch = _interopRequireDefault(require("./Pitch.jsx"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = _Pitch.default;
+exports.default = _default;
+},{"./Pitch.jsx":"components/Pitch/Pitch.jsx"}],"components/Player/Player.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/Player/Player.jsx":[function(require,module,exports) {
 "use strict";
 
@@ -28591,6 +28718,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
+
+require("./Player.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28627,10 +28756,16 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
-        className: "player"
+        className: "player-component"
       }, _react.default.createElement("span", {
         className: "player-name"
-      }, this.props.name));
+      }, this.props.name), _react.default.createElement("figure", {
+        className: "player-image-container"
+      }, _react.default.createElement("img", {
+        className: "img-responsive player-image",
+        alt: this.props.name,
+        src: this.props.avatar
+      })));
     }
   }]);
 
@@ -28639,7 +28774,7 @@ function (_React$Component) {
 
 var _default = Player;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"components/Player/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Player.scss":"components/Player/Player.scss"}],"components/Player/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28666,6 +28801,8 @@ var _react = _interopRequireDefault(require("react"));
 var _TacticsContext = require("../Tactics/TacticsContext");
 
 require("./Field.scss");
+
+var _Pitch = _interopRequireDefault(require("../Pitch"));
 
 var _Player = _interopRequireDefault(require("../Player"));
 
@@ -28702,27 +28839,30 @@ function (_React$Component) {
 
   _createClass(Field, [{
     key: "renderPlayer",
-    value: function renderPlayer(positionedPlayers, playerId, teams) {
-      var positionedPlayer = positionedPlayers.filter(function (player) {
-        return player.playerId === playerId;
-      })[0];
+    value: function renderPlayer(team, playerId, context) {
+      var players = team.players;
+      var teamId = team.id;
 
-      if (!positionedPlayer) {
+      if (!playerId) {
         return null;
       }
 
-      var foundPlayer = null;
-      teams.some(function (team) {
-        return team.players.some(function (player) {
-          if (player.id === positionedPlayer.playerId) {
-            foundPlayer = player;
-            return true;
-          }
-        });
-      });
-      return _react.default.createElement(_Player.default, {
-        name: foundPlayer.name
-      });
+      var player = players.filter(function (player) {
+        return player.id === playerId;
+      })[0];
+      return _react.default.createElement("div", {
+        className: "player",
+        onDragStart: function onDragStart(event) {
+          return context.handleDragStart(event, teamId, playerId);
+        },
+        onDragLeave: function onDragLeave(event) {
+          return context.handleDragLeave(event, team.id);
+        },
+        onDragEnd: function onDragEnd(event) {
+          return context.handleDragEnd(event, team.id);
+        },
+        draggable: true
+      }, _react.default.createElement(_Player.default, player));
     }
   }, {
     key: "render",
@@ -28732,56 +28872,33 @@ function (_React$Component) {
       return _react.default.createElement(_TacticsContext.Consumer, null, function (context) {
         return _react.default.createElement("div", {
           className: "field-area"
-        }, _react.default.createElement("div", {
-          className: "stage"
-        }, _react.default.createElement("div", {
-          className: "world"
-        }, _react.default.createElement("div", {
-          className: "terrain"
-        }, _react.default.createElement("div", {
-          className: "field ground"
-        }, _react.default.createElement("ul", {
-          className: "positions"
-        }, context.selectedTactic.positions.map(function (position) {
-          return _react.default.createElement("li", {
-            style: {
-              top: position.location.top,
-              left: position.location.left
-            },
-            key: position.id,
-            className: "pos".concat(position.index, " pos"),
-            onDragOver: context.handleDragOver,
-            onDrop: function onDrop(event) {
-              return context.handleDrop(event, position);
-            }
-          }, _this.renderPlayer(context.positionedPlayers, position.playerId, context.teams));
-        })), _react.default.createElement("div", {
-          className: "field__texture field__texture--gradient"
-        }), _react.default.createElement("div", {
-          className: "field__texture field__texture--gradient-b"
-        }), _react.default.createElement("div", {
-          className: "field__texture field__texture--grass"
-        }), _react.default.createElement("div", {
-          className: "field__line field__line--goal"
-        }), _react.default.createElement("div", {
-          className: "field__line field__line--goal field__line--goal--far"
-        }), _react.default.createElement("div", {
-          className: "field__line field__line--outline"
-        }), _react.default.createElement("div", {
-          className: "field__line field__line--penalty"
-        }), _react.default.createElement("div", {
-          className: "field__line field__line--penalty-arc"
-        }), _react.default.createElement("div", {
-          className: "field__line field__line--penalty-arc field__line--penalty-arc--far"
-        }), _react.default.createElement("div", {
-          className: "field__line field__line--mid"
-        }), _react.default.createElement("div", {
-          className: "field__line field__line--circle"
-        }), _react.default.createElement("div", {
-          className: "field__line field__line--penalty field__line--penalty--far"
-        })), _react.default.createElement("div", {
-          className: "field__side"
-        })))));
+        }, _react.default.createElement(_Pitch.default, null, context.teams.map(function (team, index) {
+          return _react.default.createElement("ul", {
+            className: "positions team-".concat(index + 1),
+            key: team.id
+          }, team.tactic.positions.map(function (position) {
+            return _react.default.createElement("li", {
+              style: {
+                top: position.location.top,
+                left: position.location.left
+              },
+              key: position.id,
+              className: "pos".concat(position.index, " pos"),
+              onDragEnter: function onDragEnter(event) {
+                return context.handleDragEnter(event, team.id, position.playerId);
+              },
+              onDragLeave: function onDragLeave(event) {
+                return context.handleDragLeave(event, team.id, position.playerId);
+              },
+              onDragOver: function onDragOver(event) {
+                return context.handleDragOver(event, team.id, position.playerId);
+              },
+              onDrop: function onDrop(event) {
+                return context.handleDrop(event, team.id, position.id);
+              }
+            }, _this.renderPlayer(team, position.playerId, context));
+          }));
+        })));
       });
     }
   }]);
@@ -28791,7 +28908,7 @@ function (_React$Component) {
 
 var _default = Field;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","../Tactics/TacticsContext":"components/Tactics/TacticsContext.js","./Field.scss":"components/Field/Field.scss","../Player":"components/Player/index.js"}],"components/Field/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../Tactics/TacticsContext":"components/Tactics/TacticsContext.js","./Field.scss":"components/Field/Field.scss","../Pitch":"components/Pitch/index.js","../Player":"components/Player/index.js"}],"components/Field/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28829,7 +28946,9 @@ module.exports = [{
     "name": "KedidJ",
     "role": "Healer",
     "avatar": "/images/chars/healer.png"
-  }]
+  }],
+  "tacticId": "tactic1",
+  "configurable": true
 }, {
   "name": "Red Team",
   "id": "t2",
@@ -28853,46 +28972,151 @@ module.exports = [{
     "name": "SelvaGi",
     "role": "Healer",
     "avatar": "/images/chars/healer2.png"
-  }]
+  }],
+  "tacticId": "tactic1",
+  "configurable": false
 }];
 },{}],"../data/tactics.json":[function(require,module,exports) {
 module.exports = [{
   "id": "tactic1",
+  "name": "Tactic 1",
   "positions": [{
     "id": "tactic1.1",
     "index": 1,
     "location": {
-      "top": "10%",
+      "top": "20%",
       "left": "7%"
-    },
-    "playerId": null
+    }
   }, {
     "id": "tactic1.2",
     "index": 2,
     "location": {
-      "top": "10%",
-      "left": "70%"
-    },
-    "playerId": "t1.3"
+      "top": "20%",
+      "left": "75%"
+    }
   }, {
     "id": "tactic1.3",
     "index": 3,
     "location": {
-      "top": "44%",
+      "top": "60%",
       "left": "18%"
-    },
-    "playerId": null
+    }
   }, {
     "id": "tactic1.4",
     "index": 4,
     "location": {
       "top": "60%",
-      "left": "7%"
-    },
-    "playerId": "t1.2"
+      "left": "68%"
+    }
+  }]
+}, {
+  "id": "tactic2",
+  "name": "Tactic 2",
+  "positions": [{
+    "id": "tactic2.1",
+    "index": 1,
+    "location": {
+      "top": "50%",
+      "left": "15%"
+    }
+  }, {
+    "id": "tactic2.2",
+    "index": 2,
+    "location": {
+      "top": "50%",
+      "left": "65%"
+    }
+  }, {
+    "id": "tactic2.3",
+    "index": 3,
+    "location": {
+      "top": "20%",
+      "left": "90%"
+    }
+  }, {
+    "id": "tactic2.4",
+    "index": 4,
+    "location": {
+      "top": "15%",
+      "left": "34%"
+    }
+  }]
+}, {
+  "id": "tactic3",
+  "name": "Tactic 3",
+  "positions": [{
+    "id": "tactic3.1",
+    "index": 1,
+    "location": {
+      "top": "90%",
+      "left": "3%"
+    }
+  }, {
+    "id": "tactic3.2",
+    "index": 2,
+    "location": {
+      "top": "80%",
+      "left": "97%"
+    }
+  }, {
+    "id": "tactic3.3",
+    "index": 3,
+    "location": {
+      "top": "23%",
+      "left": "23%"
+    }
+  }, {
+    "id": "tactic3.4",
+    "index": 4,
+    "location": {
+      "top": "12%",
+      "left": "68%"
+    }
+  }]
+}, {
+  "id": "tactic4",
+  "name": "Tactic 4",
+  "positions": [{
+    "id": "tactic4.1",
+    "index": 1,
+    "location": {
+      "top": "5%",
+      "left": "56%"
+    }
+  }, {
+    "id": "tactic4.2",
+    "index": 2,
+    "location": {
+      "top": "32%",
+      "left": "67%"
+    }
+  }, {
+    "id": "tactic4.3",
+    "index": 3,
+    "location": {
+      "top": "15%",
+      "left": "90%"
+    }
+  }, {
+    "id": "tactic4.4",
+    "index": 4,
+    "location": {
+      "top": "36%",
+      "left": "18%"
+    }
   }]
 }];
-},{}],"components/Tactics/Tactics.jsx":[function(require,module,exports) {
+},{}],"components/Tactics/Tactics.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/TacticSelector/TacticSelector.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/TacticSelector/TacticSelector.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28902,15 +29126,9 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _TacticsContext = require("./TacticsContext");
+var _TacticsContext = require("../Tactics/TacticsContext");
 
-var _PlayersList = _interopRequireDefault(require("../PlayersList"));
-
-var _Field = _interopRequireDefault(require("../Field"));
-
-var _teams = _interopRequireDefault(require("../../../data/teams.json"));
-
-var _tactics = _interopRequireDefault(require("../../../data/tactics.json"));
+require("./TacticSelector.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28932,78 +29150,352 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var Tatics =
+var TacticSelector =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(Tatics, _React$Component);
+  _inherits(TacticSelector, _React$Component);
 
-  function Tatics(props) {
+  function TacticSelector() {
+    _classCallCheck(this, TacticSelector);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(TacticSelector).apply(this, arguments));
+  }
+
+  _createClass(TacticSelector, [{
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      if (!this.props.team) {
+        return null;
+      }
+
+      return _react.default.createElement(_TacticsContext.Consumer, null, function (context) {
+        return _react.default.createElement("div", {
+          className: "tactice-selector-component"
+        }, _react.default.createElement("form", null, _react.default.createElement("label", {
+          htmlFor: "tactic-selector-".concat(_this.props.team.id)
+        }, _react.default.createElement("span", null, "Tactic"), _react.default.createElement("select", {
+          onChange: function onChange(event) {
+            return context.handleTacticChange(event, _this.props.team.id);
+          }
+        }, _this.props.tactics.map(function (tactic) {
+          return _react.default.createElement("option", {
+            key: tactic.id,
+            value: tactic.id
+          }, tactic.name);
+        })))));
+      });
+    }
+  }]);
+
+  return TacticSelector;
+}(_react.default.Component);
+
+var _default = TacticSelector;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../Tactics/TacticsContext":"components/Tactics/TacticsContext.js","./TacticSelector.scss":"components/TacticSelector/TacticSelector.scss"}],"components/TacticSelector/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _TacticSelector = _interopRequireDefault(require("./TacticSelector.jsx"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = _TacticSelector.default;
+exports.default = _default;
+},{"./TacticSelector.jsx":"components/TacticSelector/TacticSelector.jsx"}],"components/Tactics/Tactics.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _TacticsContext = require("./TacticsContext");
+
+var _PlayersList = _interopRequireDefault(require("../PlayersList"));
+
+var _Field = _interopRequireDefault(require("../Field"));
+
+var _teams = _interopRequireDefault(require("../../../data/teams.json"));
+
+var _tactics = _interopRequireDefault(require("../../../data/tactics.json"));
+
+require("./Tactics.scss");
+
+var _TacticSelector = _interopRequireDefault(require("../TacticSelector"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function shuffle(a) {
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var _ref = [a[j], a[i]];
+    a[i] = _ref[0];
+    a[j] = _ref[1];
+  }
+
+  return a;
+}
+
+var Tactics =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Tactics, _React$Component);
+
+  function Tactics(props) {
     var _this;
 
-    _classCallCheck(this, Tatics);
+    _classCallCheck(this, Tactics);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Tatics).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Tactics).call(this, props));
 
-    _this.handleDragStart = function (event, player, teamId) {
+    _this.handleTacticChange = function (event, teamId) {
+      var tactic = _this.state.tactics.filter(function (tactic) {
+        return tactic.id === event.target.value;
+      })[0];
+
+      var teams = _this.state.teams.map(function (team) {
+        if (team.id === teamId) {
+          var previousTactic = team.tactic;
+          team.tactic = Object.assign({}, tactic);
+          team.tacticId = tactic.id; // Positioning back all players already positioned
+
+          previousTactic.positions.forEach(function (previousPosition) {
+            if (!previousPosition.playerId) {
+              return;
+            }
+
+            team.tactic.positions.some(function (position) {
+              if (position.index === previousPosition.index) {
+                position.playerId = previousPosition.playerId;
+                return true;
+              }
+            });
+          });
+        }
+
+        return team;
+      });
+
+      _this.setState({
+        teams: teams
+      });
+    };
+
+    _this.handleDragStart = function (event, teamId, playerId) {
+      if (!_this.isItemDraggable(teamId)) {
+        event.preventDefault();
+        return;
+      }
+
+      event.target.style.opacity = "0.5";
       event.dataTransfer.setData("text/plain", JSON.stringify({
-        player: player,
+        playerId: playerId,
         teamId: teamId
       }));
     };
 
-    _this.handleDragOver = function (event) {
+    _this.handleDragEnter = function (event, teamId) {
+      if (!_this.isItemDraggable(teamId)) {
+        event.preventDefault();
+        return;
+      }
+
+      event.target.classList.add("drag-over");
+    };
+
+    _this.handleDragLeave = function (event, teamId) {
+      if (!_this.isItemDraggable(teamId)) {
+        event.preventDefault();
+        return;
+      }
+
+      event.target.classList.remove("drag-over");
+    };
+
+    _this.handleDragOver = function (event, teamId) {
+      if (!_this.isItemDraggable(teamId)) {
+        return;
+      }
+
       event.preventDefault();
       event.dataTransfer.dropEffect = "move";
     };
 
-    _this.handleDrop = function (event, position) {
-      event.preventDefault();
+    _this.handleDrop = function (event, teamId, positionId) {
       var data = event.dataTransfer.getData("text/plain");
-      console.log(position);
+
+      if (!_this.isItemDraggable(teamId) || !data) {
+        return;
+      }
+
+      event.target.classList.remove("drag-over");
+      event.target.classList.add("dropped");
+      event.preventDefault();
+
+      _this.setPlayerPosition(JSON.parse(data), positionId);
     };
 
-    _this.changePlayerPosition = function (player) {};
+    _this.handleDragEnd = function (event) {
+      event.target.style.opacity = "1";
+    };
+
+    _this.setPlayerPosition = function (playerData, positionId) {
+      var team = _this.state.teams.filter(function (team) {
+        return team.id === playerData.teamId;
+      })[0];
+
+      var previousPosition = null; // Reset any previous position
+
+      team.tactic.positions.some(function (tacticPosition) {
+        if (tacticPosition.playerId === playerData.playerId) {
+          previousPosition = tacticPosition;
+          tacticPosition.playerId = null;
+          return true;
+        }
+      });
+      team.tactic.positions.some(function (tacticPosition) {
+        if (tacticPosition.id === positionId) {
+          if (tacticPosition.playerId && previousPosition) {
+            previousPosition.playerId = tacticPosition.playerId;
+          }
+
+          tacticPosition.playerId = playerData.playerId;
+          return true;
+        }
+      });
+      team.players.some(function (player) {
+        if (player.id === playerData.playerId) {
+          player.selected = true;
+          return true;
+        }
+      });
+
+      _this.setState({
+        team: team
+      });
+    };
 
     _this.state = {
-      teams: _teams.default,
-      positionedPlayers: [{
-        playerId: "t1.3",
-        positionId: "tactic1.2"
-      }, {
-        playerId: "t1.2",
-        positionId: "tactic1.4"
-      }],
+      teams: [],
       changePlayerPosition: _this.changePlayerPosition,
       handleDragStart: _this.handleDragStart,
+      handleDragEnter: _this.handleDragEnter,
+      handleDragLeave: _this.handleDragLeave,
       handleDragOver: _this.handleDragOver,
       handleDrop: _this.handleDrop,
+      handleDragEnd: _this.handleDragEnd,
       tactics: _tactics.default,
-      selectedTactic: _tactics.default[0]
+      handleTacticChange: _this.handleTacticChange
     };
     return _this;
   }
 
-  _createClass(Tatics, [{
+  _createClass(Tactics, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setTeamsTactics();
+    }
+  }, {
+    key: "setRandomPosition",
+    value: function setRandomPosition(team) {
+      var positions = [];
+      var playersIds = team.players.map(function (player) {
+        player.selected = true;
+        return player.id;
+      });
+      playersIds = shuffle(playersIds);
+      team.tactic.positions.forEach(function (position) {
+        var newPosition = Object.assign({}, position);
+        newPosition.playerId = playersIds.pop();
+        positions.push(newPosition);
+      });
+      team.tactic.positions = positions;
+    }
+  }, {
+    key: "setTeamsTactics",
+    value: function setTeamsTactics() {
+      var teams = _teams.default.map(function (team) {
+        var tactic = _tactics.default.filter(function (tactic) {
+          return tactic.id === team.tacticId;
+        })[0];
+
+        team.tactic = Object.assign({}, tactic);
+        return team;
+      });
+
+      this.setRandomPosition(teams[1]);
+      this.setState({
+        teams: teams
+      });
+    }
+  }, {
+    key: "isItemDraggable",
+    value: function isItemDraggable(teamId) {
+      var team = this.state.teams.filter(function (team) {
+        return team.id === teamId;
+      })[0];
+      return !team ? false : team.configurable;
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
-        className: "container"
+        className: "container tactics-component"
       }, _react.default.createElement(_TacticsContext.Provider, {
         value: this.state
       }, _react.default.createElement("div", {
-        className: "col-1 players-list-container"
-      }, _react.default.createElement(_PlayersList.default, null)), _react.default.createElement("div", {
-        className: "col-11 field-container"
-      }, _react.default.createElement(_Field.default, null))));
+        className: "col-2 players-list-container team-1-list"
+      }, _react.default.createElement(_TacticSelector.default, {
+        tactics: this.state.tactics,
+        team: this.state.teams[0]
+      }), _react.default.createElement(_PlayersList.default, {
+        team: this.state.teams[0]
+      })), _react.default.createElement("div", {
+        className: "col-8 field-container"
+      }, _react.default.createElement(_Field.default, null)), _react.default.createElement("div", {
+        className: "col-2 players-list-container team-2-list"
+      }, _react.default.createElement(_TacticSelector.default, {
+        tactics: this.state.tactics,
+        team: this.state.teams[1]
+      }), _react.default.createElement(_PlayersList.default, {
+        team: this.state.teams[1]
+      }))));
     }
   }]);
 
-  return Tatics;
+  return Tactics;
 }(_react.default.Component);
 
-var _default = Tatics;
+var _default = Tactics;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./TacticsContext":"components/Tactics/TacticsContext.js","../PlayersList":"components/PlayersList/index.js","../Field":"components/Field/index.js","../../../data/teams.json":"../data/teams.json","../../../data/tactics.json":"../data/tactics.json"}],"components/Tactics/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./TacticsContext":"components/Tactics/TacticsContext.js","../PlayersList":"components/PlayersList/index.js","../Field":"components/Field/index.js","../../../data/teams.json":"../data/teams.json","../../../data/tactics.json":"../data/tactics.json","./Tactics.scss":"components/Tactics/Tactics.scss","../TacticSelector":"components/TacticSelector/index.js"}],"components/Tactics/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29094,7 +29586,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49276" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60535" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
